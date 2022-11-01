@@ -59,6 +59,9 @@ describe("problem2", () => {
   test("case6", () => {
     expect(problem2("a")).toEqual("a");
   });
+  test("case7", () => {
+    expect(problem2("abbabba")).toEqual("");
+  });
 });
 
 describe("problem3", () => {
