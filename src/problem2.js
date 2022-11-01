@@ -1,15 +1,34 @@
+// 2:17 3:15
 function problem2(cryptogram) {
-  const stack = new Array(cryptogram[0]);
-  let duplicatedChar = ""; //3자 이상의 중복일 경우를 위해 pop한 글자를 저장하는 변수
-
-  for (let i = 1; i < cryptogram.length; i++) {
-    const top = stack.length - 1;
-    if (stack[top] !== cryptogram[i] && duplicatedChar !== cryptogram[i]) {
-      stack.push(cryptogram[i]);
-      duplicatedChar = "";
-    } else if (stack[top] === cryptogram[i]) duplicatedChar = stack.pop();
-  }
-  return stack.join("");
+  return deduplication(cryptogram);
 }
 
+const deduplication = (str) => {
+  if (!isDuplication(str)) return str;
+
+  let res = [str[0]];
+  let duplicationChar = "";
+  for (let i = 1; i < str.length; i++) {
+    if (str[i - 1] !== str[i] && duplicationChar !== str[i]) {
+      duplicationChar = "";
+      res.push(str[i]);
+    } else if (res[res.length - 1] === str[i]) duplicationChar = res.pop();
+  }
+
+  return deduplication(res.join(""));
+};
+
+const isDuplication = (str) => {
+  for (let i = 0; i < str.length - 1; i++) {
+    if (str[i] === str[i + 1]) return true;
+  }
+  return false;
+};
+console.log(deduplication("zzzyallllelyz"));
 module.exports = problem2;
+
+/**
+ * 중복 감지 재귀
+ * 그 재귀 안에서 문자열을 하나씩 읽어가며 중복이면 넘어가게..
+ * 중복이 더이상 없으면 그 문자 반환
+ */
