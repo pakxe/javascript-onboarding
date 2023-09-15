@@ -4,20 +4,15 @@ const [POBI_WIN, CRONG_WIN] = [1, 2];
 const DRAW = 0;
 const EXCEPTION = -1;
 
-function problem1(pobi, crong) {
-	// 유효한 페이지가 아닌 경우 게임 종료
-	if (!isValidPages(pobi) && !isValidPages(crong)) return EXCEPTION;
-
-	// const [pobiLeft, pobiRight] = pobi;
-	// const [crongLeft, crongRight] = crong;
-
-	const pobiMax = getMax(pobi);
-	const crongMax = getMax(crong);
-}
+const getResult = (costA, costB) => {
+	if (costA > costB) return POBI_WIN;
+	if (costA < costB) return CRONG_WIN;
+	if (costA === costB) return DRAW;
+};
 
 const getMax = (pages) => {
-	const pagesMax = pages.map(([left, right]) =>
-		Math.max(totalSum(left), totalMul(right))
+	const pagesMax = pages.map((page) =>
+		Math.max(totalSum(page), totalMul(page))
 	);
 
 	return Math.max(...pagesMax);
@@ -43,5 +38,17 @@ const isValidPages = ([left, right]) => {
 	if (right > LAST_PAGE) return false;
 	return true;
 };
+
+// problem1([1, 2], [3, 4]);
+function problem1(pobi, crong) {
+	// 유효한 페이지가 아닌 경우 게임 종료
+	if (!isValidPages(pobi) && !isValidPages(crong)) return EXCEPTION;
+
+	console.log(pobi);
+	const pobiMax = getMax(pobi);
+	const crongMax = getMax(crong);
+
+	return getResult(pobiMax, crongMax);
+}
 
 module.exports = problem1;
