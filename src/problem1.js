@@ -18,4 +18,6 @@ const totalMul = (pageNum) => {
 	return strPageNum.reduce((sum, num) => sum * num, 1);
 };
 
+const getNumToArr = (num) => num.toString().split('').map(Number);
+
 module.exports = problem1;
