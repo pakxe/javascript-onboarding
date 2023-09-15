@@ -33,18 +33,28 @@ const totalMul = (pageNum) => {
 
 const getNumToArr = (num) => num.toString().split('').map(Number);
 
-const isValidPages = ([left, right]) => {
-	if (left < START_PAGE) return false;
-	if (right > LAST_PAGE) return false;
+const isImPossiblePage = ([left, right]) => {
+	if (left < START_PAGE) return true;
+	if (right > LAST_PAGE) return true;
+	return false;
+};
+
+const isContinuousPage = ([left, right]) => {
+	if (right - left === 1) return true;
+	return false;
+};
+
+const validation = (book) => {
+	if (isImPossiblePage(book)) return false;
+	if (!isContinuousPage(book)) return false;
+
 	return true;
 };
 
-// problem1([1, 2], [3, 4]);
 function problem1(pobi, crong) {
 	// 유효한 페이지가 아닌 경우 게임 종료
-	if (!isValidPages(pobi) && !isValidPages(crong)) return EXCEPTION;
+	if (!validation(pobi) || !validation(crong)) return EXCEPTION;
 
-	console.log(pobi);
 	const pobiMax = getMax(pobi);
 	const crongMax = getMax(crong);
 
