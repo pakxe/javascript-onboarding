@@ -6,4 +6,10 @@ function problem1(pobi, crong) {
 	return answer;
 }
 
+const totalSum = (pageNum) => {
+	const strPageNum = pageNum.toString().split('').map(Number);
+
+	return strPageNum.reduce((sum, num) => sum + num, 0);
+};
+
 module.exports = problem1;
