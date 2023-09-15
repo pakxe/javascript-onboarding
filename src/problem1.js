@@ -12,4 +12,10 @@ const totalSum = (pageNum) => {
 	return strPageNum.reduce((sum, num) => sum + num, 0);
 };
 
+const totalMul = (pageNum) => {
+	const strPageNum = pageNum.toString().split('').map(Number);
+
+	return strPageNum.reduce((sum, num) => sum * num, 1);
+};
+
 module.exports = problem1;
